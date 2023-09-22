@@ -44,6 +44,32 @@ def sample():
  
 
 
+#localhost:5000/user/james, localhost:5000/user/maria
+@app.route('/user/<uname>')
+def user(uname):        # uname 타입 : str
+    return f'<h1>uname = {uname}</h1>'
+
+
+#localhost:5000/square/12
+#@app.route('/square/<number>')          # 파라메타에 넘어오는건 디폴트타입이 str
+#def square(number):
+#    return f'<h1>{number} ** 2 = {int(number) ** 2}</h1>'
+
+@app.route('/square/<int:number>')      # 파라메타에 타입을 int로 지정
+def square(number):
+    return f'<h1>{number} ** 2 = {number ** 2}</h1>'
+
+
+#localhost:5000/circle/3.14/and/10          #float이면 소숫자리까지 표현해줘야 에러안남
+@app.route('/circle/<float:pi>/and/<float:radius>')         
+def circle(pi, radius):
+    result = pi * radius ** 2
+    return f'<h1> pi={pi}, radius={radius}, area={result}</h1>'
+    
+ # ★★★★ Form으로 받을때는 request!!  반드시 기억 ★★★★
+# form을 보여주는 메소드 : GET
+# 프로세스적용후 페이지를 보여주는것 : PORT
+
 if __name__ == '__main__':
     app.run(debug=True)         
 
