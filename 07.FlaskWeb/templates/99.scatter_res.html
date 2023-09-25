@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scatter</title>
+    <title>산점도</title>
 </head>
 <body style="margin: 40px;">
-    <img src="{{url_for('static', filename='img/scatter.png', q=mtime)}}" height="400">
+    <h2>산점도</h2>
+    <hr>
+    <img src="{{url_for('static', filename='img/scatter.png')}}">
+    <!-- <h4>X축: 정규분포(평균={{avg}}, 표준편차={{std}})</h4>
+    <h4>Y축: 균등분포(최소={{min}}, 최대={{max}})</h4> -->
+    <!--scatter.py파일에서 
+        return render_template('99.scatter_res.html', avg=avg, std=std, min=min, max=max)
+        이렇게 써주면, 해당 파일에서 사용가능(이걸 렌더링 이라고함)
+        -->
+    <h4>X축: 정규분포(평균={{params.avg}}, 표준편차={{params.std}})</h4>
+    <h4>Y축: 균등분포(최소={{params.min}}, 최대={{params.max}})</h4>
+    <!-- 딕셔너리로 파라메타 지정한 경우 위와 같이 불러옴 딕셔너리명.파라메타명 -->
+    <br><br>
+    <button onclick="location.href='/scatter'">재실행</button>
 </body>
 </html>

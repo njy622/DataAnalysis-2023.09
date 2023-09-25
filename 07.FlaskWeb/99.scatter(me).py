@@ -1,10 +1,7 @@
 import os 
-from flask import Flask, render_template, request
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-plt.rcParams['font.family'] = 'Malgun Gothic'
-plt.rcParams['axes.unicode_minus'] = False 
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -12,7 +9,7 @@ app = Flask(__name__)
 def index():
     return '<h1>산점도 그리기</h1>'
 
-@app.route('/scatter/a',methods=['GET','POST'])
+@app.route('/scatter',methods=['GET','POST'])
 def scatter_res():
     if request.method == 'GET':                
         return render_template('99.scatter.html')
@@ -35,4 +32,4 @@ def scatter_res():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)     # debug=True 변경한 사항이 바로 적용
