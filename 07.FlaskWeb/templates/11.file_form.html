@@ -1,0 +1,8 @@
+{% extends "10.bootatrap.html" %}
+{% block subtitle %}File upload{% endblock %}
+    {# <form action="/upload" method="post"> 일반 업로드는 이렇게 #}
+    <form action="/upload" method="post" enctype="multipart/form-data">  <!-- 파일업로드는 반드시 이렇게 -->
+        파일 선택: <input type="file" name="image">
+        <input type="submit" value="업로드">
+    </form>
+{% block content %}
