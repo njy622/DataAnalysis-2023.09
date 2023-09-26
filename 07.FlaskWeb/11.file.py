@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request   
+import os
+from flask import Flask, render_template, request
 
 app = Flask(__name__)          
 
@@ -12,7 +13,10 @@ def upload():
         return render_template('11.file_form.html')
     else:
         file_image = request.files['image']
-        return '<h1>환영합니다 </h1>'
+        fname = file_image.filename             # 업로드한 파일 이름
+        filename = os.path.join(app.static_folder, f'upload/{fname}')
+        file_image.save(filename)
+        return render_template('11.file_res.html', fname=f'upload/{fname}')  # 업로드한 파일을 보여주는 곳
 
 if __name__ == '__main__':
-    app.run(debug=True)         
+    app.run(debug=True)     
