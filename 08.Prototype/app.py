@@ -16,15 +16,29 @@ app.register_blueprint(user_bp, url_prefix='/user')
 
 @app.before_first_request       # 어떤 요청이 들어올때, 제일 처음 실행할것
 def before_first_request():     # 최초 1회 실행
-    global quotes, quote        # 다른곳에서도 수정할 수 있도록 global변수를 만듦
-    global addr
+    global quotes, addr               # 다른곳에서도 수정할 수 있도록 global변수를 만듦
     filename = os.path.join(app.static_folder, 'data/todayQuote.txt')
     with open(filename, encoding='utf-8') as file:
         quotes = file.readlines()       # 파일을 리스트형태로 읽음
+    session['quote'] = random.sample(quotes, 1)[0]
+    session['addr'] = '서울시 영등포구'
+
+# for AJAX #######################수정버튼 누르면 어사이드에 명언텍스트만 변경되는것
+@app.route('/change_quote')
+def change_quote():
     quote = random.sample(quotes, 1)[0]
     session['quote'] = quote
-    addr = '서울시 영등포구'
+    return quote
+
+
+@app.route('/change_addr')
+def change_addr():
+    addr = request.args.get('addr')
     session['addr'] = addr
+    return addr
+
+
+######################################################################
 
 @app.route('/')
 def home():

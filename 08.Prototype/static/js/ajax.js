@@ -6,7 +6,7 @@ function changeQuote() {
         url: '/change_quote', 
         data: ' ',              // 서버로 전달할 데이터
         success: function(msg) {        // msg: 서버로부터 받은 데이터
-            $('#quoteMsg').html(msg);
+            $('#quoteMsg').html(msg);           // jQuery 문법 <span id="quoteMsg">{{ session['quote'] }}</span>(base.html 84번줄)
         }
     });
 }
@@ -14,12 +14,12 @@ function changeAddr() {
     $('#addrInput').attr('class', 'mt-2');      // input box가 보이게
 }
 function addrSubmit() {
-    $('#addrInput').attr('class', 'mt-2 d-none');   // input box가 안보이게
-    let addr = $('#addrInputTag').val();
+    $('#addrInput').attr('class', 'mt-2 d-none');   // input box가 안보이게  
+    let addr = $('#addrInputTag').val();            // 입력한 값이 addr로 들어옴
     $.ajax({
         type: 'GET',
         url: '/change_addr',
-        data: {addr: addr},
+        data: {addr: addr},             //  /change_addr?addr=서울시 강남구
         success: function(msg) {
             $('#addr').html(msg);
         }
