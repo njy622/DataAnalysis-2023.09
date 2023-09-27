@@ -3,6 +3,8 @@ from bp.crawling import crawl_bp
 from bp.map import map_bp
 from bp.user import user_bp
 import os, random
+import util.map_util as mu
+import util.weather_util as wu
 
 app = Flask(__name__)
 app.secret_key = 'qwert12345'                   # flash와 session을 사용하려면 반드시 설정해야 함
@@ -36,6 +38,15 @@ def change_addr():
     addr = request.args.get('addr')
     session['addr'] = addr
     return addr
+
+@app.route('/weather')
+def weather():
+    # 서울시 영등포구 + '청' -> 도로명 주소 -> 카카오 로컬 -> 좌표 획득
+    addr = request.args.get('addr')
+    lat, lng = mu.get_coord(app.static_folder, addr + '청')
+    html = wu.get_weather(app.static_folder, lat, lng)
+    #html = f'<img src="http://api.openweathermap.org/img/w/04d.png" height="32"><strong>튼구름</strong>, 온도: <strong>24.0</strong>&#8451'
+    return html
 
 
 ######################################################################
