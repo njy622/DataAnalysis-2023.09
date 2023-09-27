@@ -47,6 +47,7 @@ def weather():
     html = wu.get_weather(app.static_folder, lat, lng)
     #html = f'<img src="http://api.openweathermap.org/img/w/04d.png" height="32"><strong>튼구름</strong>, 온도: <strong>24.0</strong>&#8451'
     return html
+    
 
 
 ######################################################################
