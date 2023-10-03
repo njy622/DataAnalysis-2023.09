@@ -79,3 +79,29 @@ def get_restaurant_list(place):
         data.append({'업소명':name, '평점':score, '메뉴':menu, '주소':addr, '전화번호':tel, 'href':href, 'src': src})
 
     return data
+
+
+
+def get_kakao_list():
+    base_url = 'https://page.kakao.com/menu/10010/screen/93'
+    url = f'{base_url}?keywords=
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    lis = soup.select('.localFood_list > li')
+    data = []
+    for li in lis:
+        atag = li.select_one('figcaption > a')
+        name = atag.select_one('h2').get_text().strip() 
+        score = atag.select_one('.score').get_text().strip()
+        menu = li.select('.cate > a')[-1].get_text().strip()
+        sub_href = atag['href']
+        sub_res = requests.get(sub_href)
+        sub_soup = BeautifulSoup(sub_res.text, 'html.parser')
+        info = sub_soup.select('.pc_only>td')
+        addr = info[0].select_one('div').get_text().split('지번')[0].strip()
+        tel = info[1].select_one('div').get_text().strip()
+        href = li.select_one('a')['href']
+        src = li.select_one('figure > a > img')['src']
+        data.append({'업소명':name, '평점':score, '메뉴':menu, '주소':addr, '전화번호':tel, 'href':href, 'src': src})
+
+    return data
