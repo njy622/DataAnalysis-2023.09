@@ -84,7 +84,7 @@ def get_restaurant_list(place):
 
 def get_kakao_list():
     base_url = 'https://page.kakao.com/menu/10010/screen/93'
-    url = f'{base_url}?keywords=
+    url = f'{base_url}?keywords='
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
     lis = soup.select('.localFood_list > li')
