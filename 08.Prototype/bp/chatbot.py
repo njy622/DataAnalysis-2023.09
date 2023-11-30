@@ -11,8 +11,8 @@ chatbot_bp = Blueprint('chatbot_bp', __name__)
 
 menu = {'ho':0, 'us':0, 'cr':0, 'ma':0, 'cb':1, 'sc':0}
 
-@chatbot_bp.before_app_first_request
-def before_app_first_request():
+@chatbot_bp.before_app_request
+def before_app_request():
     global model, wdf
     model = SentenceTransformer('jhgan/ko-sroberta-multitask')
     filename = os.path.join(current_app.static_folder, 'data/wellness_dataset.csv')
