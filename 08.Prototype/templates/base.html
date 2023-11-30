@@ -101,8 +101,8 @@
                     <a href="#" onclick="changeAddr(); return false;">
                         <img src="{{url_for('static', filename='data/addr.png')}}" height="16">
                     </a>
-                        <span id="addr">{{ session['addr'] }}</span>
-                        <a href="javascript:changeWeather()"><span class="badge bg-secondary">날씨</span></a>
+                    <span id="addr">{{ session['addr'] }}</span>
+                    <a href="javascript:changeWeather()"><span class="badge bg-secondary">날씨</span></a>
                     <div id="addrInput" class="mt-2 d-none">
                         <input type="text" id="addrInputTag" class="form-control form-control-sm"
                             onkeyup="if(window.event.keyCode==13) {addrSubmit()}">
