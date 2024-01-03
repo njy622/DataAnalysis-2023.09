@@ -12,7 +12,7 @@ chatbot_bp = Blueprint('chatbot_bp', __name__)
 menu = {'ho':0, 'us':0, 'cr':0, 'ma':0, 'cb':1, 'sc':0}
 
 @chatbot_bp.before_app_request
-def before_app_request():
+def before_app_first_request():
     global model, wdf
     model = SentenceTransformer('jhgan/ko-sroberta-multitask')
     filename = os.path.join(current_app.static_folder, 'data/wellness_dataset.csv')
@@ -34,7 +34,6 @@ def counsel():
         }
         return json.dumps(result)
 
-# GET방식으로만 가져오는 방식 / 스프링에서 PythonGetChatbot.java 파일 확인
 @chatbot_bp.route('/counsel_rest')
 def counsel_rest():
     user_input = unquote(request.args.get('userInput'))
